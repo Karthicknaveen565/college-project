@@ -1,0 +1,186 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+<!-- MDB -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" />
+<!-- MDB -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+
+<style>
+    .top-30{
+        top:30%;
+    }
+    .start-30{
+        left:25%;
+    }
+    .start-60{
+        left:55%;
+    }
+    .img-size{
+        height:1vh;
+    
+    }
+    .card{
+        transition:all 0.3s;
+    }
+    .card:hover{
+        transform:scale(1.04);
+    }
+    html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    
+   }
+   * {
+	border: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+.pl {
+	display: block;
+	width: 16.25em;
+	height: 16.25em;
+}
+.pl__ring, .pl__ball {
+	animation: ring 2s ease-out infinite;
+}
+.pl__ball {
+	animation-name: ball;
+}
+
+/* Dark theme  */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: hsl(var(--hue),10%,10%);
+		--fg: hsl(var(--hue),10%,90%);
+	}
+}
+
+/* Animation */
+@keyframes ring {
+	from {
+		stroke-dasharray: 0 257 0 0 1 0 0 258;
+	}
+	25% {
+		stroke-dasharray: 0 0 0 0 257 0 258 0;
+	}
+	50%, to {
+		stroke-dasharray: 0 0 0 0 0 515 0 0;
+	}
+}
+@keyframes ball {
+	from, 50% {
+		animation-timing-function: ease-in;
+		stroke-dashoffset: 1;
+	}
+	64% {
+		animation-timing-function: ease-in;
+		stroke-dashoffset: -109;
+	}
+	78% {
+		animation-timing-function: ease-in;
+		stroke-dashoffset: -145;
+	}
+	92% {
+		animation-timing-function: ease-in;
+		stroke-dashoffset: -157;
+	}
+	57%, 71%, 85%, 99%, to {
+		animation-timing-function: ease-out;
+		stroke-dashoffset: -163;
+	}
+}
+</style>
+<!-- Navbar -->
+
+{{nav-bar userdashboard=true gotoinvitation=true gotoinvitationstatus=(action "gotoinvitationstatus") redirecttohome=(action "redirecttohome") }}
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left links -->
+
+            <!-- Right links -->
+
+            <!-- Search form -->
+            <form class="d-flex input-group w-auto mx-auto ">
+                <input type="search" id="searchval" class="form-control" onkeyup={{action "searchjob"}} placeholder="Search" aria-label="Search" />
+                <button class="btn btn-primary" type="button" data-mdb-ripple-color="dark" {{action "searchjob"}}>
+                    Search
+                </button>
+                
+                <button class="btn btn-secondary dropdown-toggle ms-3" type="button" id="dropdownMenuButton2"
+                    data-mdb-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    Search by
+                </button>
+                <div class="dropdown-menu dropdown-menu-center" aria-labelledby="dropdownMenuButton2">
+                    <h6 class="dropdown-header">Search Results By:</h6>
+                    <form class="row row-cols-lg-auto g-3 align-items-center" style="padding:2%">
+                        <div id="rates" class="form-check">
+                                <input class="form-check-input mx-auto d-block" type="radio" id="s1" name="search" value="designation" checked="checked" >
+                                 <label class="form-check-label" for="s1">Designation</label>
+                                 <br>
+                                <input class="form-check-input mx-auto d-block" type="radio" id="s2" name="search" value="city"> 
+                                <label class="form-check-label" for="s2">City</label>
+                                <br>
+                                <input class="form-check-input mx-auto d-block" type="radio" id="s3" name="search" value="employeename">
+                                <label class="form-check-label" for="s3">employeename</label>
+                        </div>
+                        <br>
+                        <button class="btn btn-primary mx-auto d-block" {{action "filter"}} >Apply Changes</button>
+                    </form>
+                </div>
+            </form>
+        </div>
+        
+        
+        <!-- Collapsible wrapper -->
+    </div>
+    <!-- Container wrapper -->
+</nav>
+
+<br>
+<div class="row row-cols-1 row-cols-md-5">
+    {{#each results as |result|}}
+       {{#employee-card result=result displayemployee=(action 'displayemployee')}}
+       <a class="btn btn-light-blue btn-md" role="button">view employee</a>
+       {{/employee-card}}
+    {{/each}}
+</div>
+{{!-- <div class="spinner-border text-secondary"style="position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;"></div> --}}
+    {{#if loader}}
+    <svg class="pl" viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg" style="position: absolute;
+    top: 50%;
+    left: 42%;">
+	<defs>
+		<linearGradient id="pl-grad1" x1="1" y1="0.5" x2="0" y2="0.5">
+			<stop offset="0%" stop-color="hsl(313,90%,55%)" />
+			<stop offset="100%" stop-color="hsl(223,90%,55%)" />
+		</linearGradient>
+		<linearGradient id="pl-grad2" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0%" stop-color="hsl(313,90%,55%)" />
+			<stop offset="100%" stop-color="hsl(223,90%,55%)" />
+		</linearGradient>
+	</defs>
+	<circle class="pl__ring" cx="100" cy="100" r="82" fill="none" stroke="url(#pl-grad1)" stroke-width="36" stroke-dasharray="0 257 1 257" stroke-dashoffset="0.01" stroke-linecap="round" transform="rotate(-90,100,100)" />
+	<line class="pl__ball" stroke="url(#pl-grad2)" x1="100" y1="18" x2="100.01" y2="182" stroke-width="36" stroke-dasharray="1 165" stroke-linecap="round" />
+    </svg>
+    {{/if}}
+<br>
+<br>
+<br>
+<br>   
+{{#if verify}}
+<div class="text-center">
+  no results found
+</div>
+{{/if}}

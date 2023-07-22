@@ -1,0 +1,48 @@
+<div class="col" style="padding: 3%">
+        <div class="card text-center" {{action "redirecttodisplayemployee" result.id}}>
+
+            <!--Card image-->
+            <div class="view overlay">
+                <img class="card-img-top" style="height:25vh;width:25vh" src="https://www.iconexperience.com/_img/o_collection_png/green_dark_grey/512x512/plain/worker.png"
+                    alt="Card image cap">
+                <a>
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+
+            <!--Card content-->
+            <div class="card-body ">
+
+                <!--Title-->
+                <h4 class="card-title">{{result.employeename}}</h4>
+                <!--Text-->
+                <p class="card-text">
+                    job:{{result.designation}}<br>
+                    charges/hr:{{result.charges}}<br>
+                    city:{{result.city}}<br>
+                    {{#if (eq result.available 0)}}
+                        <span class="badge badge-success">Available</span>
+                    {{else if (eq result.available 1)}}
+                        <span class="badge badge-danger">In work</span>
+                    {{else}}
+                        <span class="badge badge-light">unavailable</span>
+                    {{/if}}<br>
+                    {{#each ratings as |rate|}}
+                        <i class="fa fa-star {{if (lte rate result.rating) 'text-warning'}}"></i>
+                    {{/each}}
+                    {{!-- <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span> --}}
+                </p>
+                <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                {{yield}}
+
+            </div>
+
+        </div>
+        
+
+    
+    </div>

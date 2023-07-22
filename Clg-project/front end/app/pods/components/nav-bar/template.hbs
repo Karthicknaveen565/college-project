@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="width:100%">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+        <!-- Toggle button -->
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+            data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Navbar brand -->
+            <a class="navbar-brand mt-2 mt-lg-0">
+                <img src="assests/images/SEMS.png" height="45" alt="MDB Logo" loading="lazy" />
+            </a>
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {{#if Dashboard}}
+                <li class="nav-item">
+                    <a class="nav-link" role="button" {{action gotodashboard}}>Dashboard</a>
+                </li>
+                {{/if}}
+                {{#if userdashboard}}
+                <li class="nav-item">
+                    <a class="nav-link" role="button" >Dashboard</a>
+                </li>
+                {{/if}}
+            </ul>
+            <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
+        {{#if gotoinvitation}}
+        <div role="button" title="Invitation Status" class="dropdown me-4" {{action gotoinvitationstatus}}>
+            <i class="fas fa-briefcase fa-lg"></i>
+        </div>
+        {{/if}}
+    
+        <div class="d-flex align-items-center">
+            <!-- Icon -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center"  id="navbarDropdownMenuLink"
+                        role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        <img src="https://tse4.mm.bing.net/th?id=OIP.7HUETz0J6eRt_7psW3_TFAHaHa&pid=Api&P=0" class="rounded-circle"
+                            height="30" alt="" loading="lazy" />
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" role="button">My profile</a></li>
+                        <li><a class="dropdown-item " role="button" {{action redirecttohome}}>Logout</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+            <!-- Notifications -->
+
+            <!-- Avatar -->
+
+        </div>
+
+        <!-- Right elements -->
+    </div>
+    <!-- Container wrapper -->
+</nav>
+{{yield}}

@@ -1,0 +1,208 @@
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+></script>
+<style>
+  body{
+    overflow-x: hidden;
+  }
+</style>
+<script src="https://unpkg.com/@popperjs/core@2.10.2/dist/esm/popper.min.js"></script>
+{{!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
+{{!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> --}}
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="width:100%">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+        <!-- Toggle button -->
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+            data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Navbar brand -->
+            <a class="navbar-brand mt-2 mt-lg-0">
+                <img src="assests/images/SEMS.png" height="45" alt="MDB Logo" loading="lazy" />
+            </a>
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" role="button">Dashboard</a>
+                </li>
+            </ul>
+            <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
+        <div>Status:</div>
+        <div class="me-4">
+          <select class="form-select" id="my-select" {{action "updateStatus"}}>
+            <option value="0" data-icon="fa fa-circle" selected="{{if (eq Status 0) "selected"}}">Available</option>
+            <option value="1" data-icon="fa fa-circle" selected="{{if (eq Status 1) "selected"}}">In a work</option>
+            <option value="-1" data-icon="fa fa-circle" selected="{{if (eq Status -1) "selected"}}" >unavailable</option>
+          </select>
+        </div>
+        <div class="d-flex align-items-center">
+            <!-- Icon -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center"  id="navbarDropdownMenuLink"
+                        role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        <img src="https://tse4.mm.bing.net/th?id=OIP.7HUETz0J6eRt_7psW3_TFAHaHa&pid=Api&P=0" class="rounded-circle"
+                            height="30" alt="" loading="lazy" />
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" role="button">My profile</a></li>
+                        <li><a class="dropdown-item" role="button" {{action "redirecttohome"}}>Logout</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+            <!-- Notifications -->
+
+            <!-- Avatar -->
+
+        </div>
+
+        <!-- Right elements -->
+    </div>
+    <!-- Container wrapper -->
+</nav>
+
+<!-- Tabs navs -->
+<br>
+<br>
+<div class="row d-flex justify-content-center">
+<ul class="nav nav-tabs nav-fill mb-2" id="ex1" style="width:70%" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a
+      class="nav-link active"
+      id="ex2-tab-1"
+      data-mdb-toggle="tab"
+      href="#order-tab"
+      role="tab"
+      aria-controls="ex2-tabs-1"
+      aria-selected="true"
+      >Received Works</a
+    >
+  </li>
+  
+  <li class="nav-item" role="presentation">
+    <a
+      class="nav-link"
+      id="ex2-tab-3"
+      data-mdb-toggle="tab"
+      href="#ratings-tab"
+      role="tab"
+      aria-controls="ex2-tabs-3"
+      aria-selected="false"
+      >Ratings</a
+    >
+  </li>
+</ul>
+</div>
+<!-- Tabs navs -->
+<!-- Tabs content -->
+<div class="row d-flex justify-content-center">
+<div class="tab-content" id="ex2-content">
+  <div
+    class="tab-pane fade show active"
+    id="order-tab"
+    role="tabpanel"
+    aria-labelledby="ex2-tab-1"
+  >
+  {{#if displayorders}}
+    <ol class="list-group list-group-numbered">
+        {{#each results as |result|}}
+         <li role="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" {{action "displaycustomers" result.customerid}}>
+           <div class="ms-2 me-auto">
+           <div class="fw-bold">{{result.customername}}</div>
+           city:{{result.city}}<br>
+          </div>
+          {{!-- {{#if (gte 1 result.status)}}
+             <div style="margin-right:25%">
+              Accepted    
+             </div>
+            
+          {{/if}} --}}
+          <div style="margin-right:25%">
+             
+          {{#if (isEqual result.status 0)}}
+            <p>waiting for approval.</p>
+          {{else if (isEqual result.status 1)}}
+            <p>Accepted the work invitation</p>
+          {{else}}
+            <p>Rejected the work invitation</p>
+          {{/if}}
+              
+          </div>
+         
+         {{#if (isEqual result.status 0)}}          
+         <span class="badge bg-primary rounded-pill">1</span>
+         {{/if}}
+        </li>
+        
+        {{/each}}
+  
+  {{!-- <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Subheading</div>
+      Content for list item
+    </div>
+    <span class="badge bg-primary rounded-pill">1</span>
+  </li> --}}
+</ol>
+{{/if}}
+{{#if show}}
+  <br>
+  <div class="text-center">No Orders yet.</div>
+{{/if}}
+  </div>
+  <div
+    class="tab-pane fade"
+    id="ratings-tab"
+    role="tabpanel"
+    aria-labelledby="ex2-tab-3"
+  >
+  {{!-- start  --}}
+  <div class="list-group">
+  {{#each results1 as |result|}}
+  <a role="button" class="list-group-item list-group-item-action " aria-current="true">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{result.customername}}</h5>
+      <div class="ratings">
+        {{#each ratings as |rate|}}
+          <i class="fa fa-star {{if (lte rate result.rating) 'text-warning'}}"></i>
+        {{/each}}
+      </div>
+                    
+    </div>
+    <p class="mb-1">{{result.review}}</p>
+    {{!-- <small>A].</small> --}}
+  </a>
+  {{/each}}
+  {{#if showratings}}
+  <br>
+  <div class="text-center">No Ratings yet.</div>
+  {{/if}}
+</div>
+  {{!-- end --}}
+  </div>
+</div>
+</div>
+<!-- Tabs content -->

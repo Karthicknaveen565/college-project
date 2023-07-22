@@ -1,0 +1,209 @@
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+></script>
+{{!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script> --}}
+
+<style>
+    .gradient-custom {
+/* fallback for old browsers */
+background: #f6d365;
+
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+}
+#arrow:hover{
+  background-color: azure;
+}
+</style>
+{{nav-bar Dashboard=true  gotodashboard=(action "gotodashboard") redirecttohome=(action "redirecttohome") }}
+{{#if initial}}
+<section class="vh-100" style="background-color: #f4f5f7;">
+  <div class="container py-5 h-100">
+    <i id="arrow" role="button" class="fas fa-arrow-left ms-3 mt-3" {{action "gotodashboard"}}></i>
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-6 mb-4 mb-lg-0">
+        <div class="card mb-3" style="border-radius: .5rem;">
+          <div class="row g-0">
+            <div class="col-md-4 gradient-custom text-center text-white"
+              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+              <img src="https://tse4.mm.bing.net/th?id=OIP.7HUETz0J6eRt_7psW3_TFAHaHa&pid=Api&P=0"
+                alt="Avatar" class="img-fluid my-5" style="width: 80px;border-radius:50%" />
+              <h5>{{result.employeename}}</h5>
+              <p>{{result.designation}}
+              </p>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <h6>Information</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>City</h6>
+                    <p class="text-muted">{{result.city}}</p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>charges</h6>
+                    <p class="text-muted">{{result.charges}}</p>
+                  </div>
+                </div>
+                {{!-- <h6>Projects</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>Phone Number</h6>
+                    <p class="text-muted">{{result.mobilenumber}}</p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>Mail</h6>
+                    <p class="text-muted">{{result.mail}}</p>
+                  </div>
+                </div> --}}
+                <div class="d-flex justify-content-center">
+                  {{!-- <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
+                  <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
+                  <a href="#!"><i class="fab fa-instagram fa-lg"></i></a> --}}
+                  {{#if initialinvite}}
+                  <button type="button" class="btn btn-primary btn-rounded btn-lg" {{action "invitetowork" employeeid}}>
+                      invite now
+                  </button>
+                  {{/if}}
+                  {{#if checkinvite}}
+                  <button type="button" class="btn btn-secondary btn-rounded btn-lg" disabled>Invited</button>
+                  {{/if}}
+                  {{#if rejected}}
+                   <button type="button" class="btn btn-primary btn-rounded btn-lg" {{action "reinvite"}}>Invite again</button>
+                   <button type="button" class="btn btn-danger btn-rounded btn-lg ms-3" {{action "cancelinvite"}}>Cancel</button>
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+         {{#if rejected}}
+               <h4 class="text-center">Rejected your Invitation</h4>
+         {{/if}}
+      </div>
+    </div>
+  </div>
+</section>
+{{/if}}
+{{!-- for accepted invitation --}}
+{{#if accepted}}
+<section class="vh-100" style="background-color: #f4f5f7;">
+  <div class="container py-5 h-100">
+    <i id="arrow" role="button" class="fas fa-arrow-left ms-3 mt-3" {{action "gotodashboard"}}></i>
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-8 mb-4 mb-lg-0">
+        <div class="card mb-3" style="border-radius: .5rem;">
+          <div class="row g-0">
+            <div class="col-md-4 gradient-custom text-center text-white"
+              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+              <img src="https://tse4.mm.bing.net/th?id=OIP.7HUETz0J6eRt_7psW3_TFAHaHa&pid=Api&P=0"
+                alt="Avatar" class="img-fluid my-5" style="width: 80px;border-radius:50%" />
+              <h5>{{result.employeename}}</h5>
+              <p>{{result.designation}}<br>
+                {{result.address}}
+              </p>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <h6>Information</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>Area and City</h6>
+                    <p class="text-muted">{{result.area}},<br>{{result.city}}</p>
+                    {{!-- <p class="text-muted">{{result.city}}</p> --}}
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>charges</h6>
+                    <p class="text-muted">{{result.charges}}</p>
+                  </div>
+                </div>
+                <h6>Contact Details</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>Phone Number</h6>
+                    <p class="text-muted">{{result.mobilenumber}}</p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>Mail</h6>
+                    <p class="text-muted">{{result.mail}}</p>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                  {{!-- <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
+                  <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
+                  <a href="#!"><i class="fab fa-instagram fa-lg"></i></a> --}}
+                  
+                
+                  <!-- Button trigger modal -->
+                 <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal" {{action "dummy"}}>
+                         work done
+                </button>
+                 
+                
+                       
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h4 class="text-center">Accepted the Invitation</h4>
+        <p class="text-center">you can contact them through the contanct details</p>
+      </div>
+    </div>
+  </div>
+  {{!-- modal --}}
+                 <div class="modal fade" id="exampleModal" data-mdb-backdrop="static" data-mdb-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                   <div class="modal-dialog">
+                      <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Review/Rating</h5>
+                            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"  {{action "dummy"}}></button>
+                             </div>
+                            <div class="modal-body">
+                                <div class="form-outline">
+                                  <textarea class="form-control  form-control-lg" id="textAreaExample" rows="4"></textarea>
+                                  <label class="form-label" for="textAreaExample">Review</label>
+                                </div>
+
+                                <div class="rating">
+                                      <p>Rate the work:</p>
+                                      <input type="hidden" id="rating-value">
+                                </div>
+                                <div class="ms-3">
+                                {{star-rating}}
+                                </div>
+                                        
+                            </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-primary" data-mdb-dismiss="modal" onclick={{action 'saveratingandreview'}} >Save changes</button>
+                        </div>
+                     </div>
+                    </div>
+                  </div>
+{{!-- modal ends --}}
+</section>
+{{/if}}
+
